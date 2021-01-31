@@ -9,9 +9,9 @@ Amazing heads up display for your car!
 In a windows command line:
 1. cd to carHUD directory
 2. pip install -r requirements.txt
-3. py test.py
+3. py hudData.py
 
 In a linux command line:
 1. cd to carHUD directory
 2. pip install -r requirements.txt
-3. python test.py
+3. python hudData.py
