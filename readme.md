@@ -4,6 +4,7 @@ Amazing heads up display for your car!
 # Features
 - Track and display MPH
 - Track and display RPM
+- Display Time as hh:mm:ss
 
 # How to run
 In a windows command line:
