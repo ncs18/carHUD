@@ -1,37 +1,69 @@
-import pygame, random, time
+import pygame
+import random
+import time
+import obd
+
 pygame.init()
 
+# Declare color values
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+# Define pi for easy use
+pi = 3.14159265
 
-
-# Set the height and width of the screen
+# Set the height and width of the screen, also initialize window and make 'screen' a surface
 size = [1280, 720]
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("Example code for the draw module")
+# Set window name
+pygame.display.set_caption("carHUD OS 0.1")
 
 # Loop until the user clicks the close button.
 done = False
 clock = pygame.time.Clock()
 
+# Creating different fonts for text
 font = pygame.font.SysFont(None, 36)
+clock_font = pygame.font.SysFont(None, 50)
 
 
+# Vehicle speed text display function
 def veh_speed(msg, color):
     speed_text = font.render(msg, True, color)
     screen.blit(speed_text, [180, 340])
 
 
+# Vehicle rpm text display function
+def veh_rpm(msg, color):
+    rpm_text = font.render(msg, True, color)
+    screen.blit(rpm_text, [1011, 340])
+
+
+# Time text display function
+def draw_time(msg, color):
+    time_text = clock_font.render(msg, True, color)
+    screen.blit(time_text, [120, 580])
+
+
+# Initialize speed and rpm variables
 v_speed = 0
+v_rpm = 0
 
 
+# Defining turn calculation rects for arc drawing, initialize turn_track
+
+turn_rect_left = pygame.Rect([285, 300, 355, 420])
+turn_rect_right = pygame.Rect([640, 300, 355, 420])
+turn_track = 0
+
+# Main Loop
 while not done:
 
-    clock.tick(5)
+    clock.tick(10)
+    current_time = time.strftime('%H:%M:%S')
 
     for event in pygame.event.get():  # User did something
         if event.type == pygame.QUIT:  # If user clicked close
@@ -40,22 +72,45 @@ while not done:
     screen.fill(BLACK)
 
     keys = pygame.key.get_pressed()
+# TESTING PURPOSES ONLY
+    ##############################################
 
-    #v_speed = random.randint(20, 75)
+    v_speed = random.randint(20, 75)
+    v_rpm = random.randint(1000, 1500)
 
     if keys[pygame.K_LEFT]:
-        v_speed = v_speed - 1
+        turn_track = turn_track + 3
     if keys[pygame.K_RIGHT]:
-        v_speed = v_speed + 1
+        turn_track = turn_track - 3
     if keys[pygame.K_UP]:
         v_speed = v_speed + 5
     if keys[pygame.K_DOWN]:
         v_speed = v_speed - 5
 
-    v_speedstring = str(v_speed)
+    ################################################
+
+    # Converting ints to strings to display as text
+    v_speed_string = str(v_speed)
+    v_rpm_string = str(v_rpm)
+
+    # Drawing boxes around MPH and RPM
     pygame.draw.lines(screen, GREEN, True, [(178, 338), (270, 338), (279, 350), (270, 362), (178, 362)], 2)
+    pygame.draw.lines(screen, GREEN, True, [(1130, 338), (1010, 338), (1001, 350), (1010, 362), (1130, 362)], 2)
+
+    # Uses 2 separate rects to draw turn calculation line based off of wheel rotation 'turn_track'
+    if turn_track > 0:
+        pygame.draw.arc(screen, GREEN, turn_rect_left, 0, turn_track * (pi / 180), 3)
+    elif turn_track < 0:
+        pygame.draw.arc(screen, GREEN, turn_rect_right, pi - (turn_track * -(pi / 180)), pi, 3)
+
+    # Drawing two vertical lines on hud
     pygame.draw.line(screen, GREEN, [285, 100], [285, 620], 2)
-    veh_speed((v_speedstring + " MPH"), GREEN)
+    pygame.draw.line(screen, GREEN, [995, 100], [995, 620], 2)
+    # Displaying text of MPH and RPM with actual numbers
+    veh_speed((v_speed_string + " MPH"), GREEN)
+    veh_rpm((v_rpm_string + " RPM"), GREEN)
+    # Displays time
+    draw_time(current_time, GREEN)
 
     pygame.display.update()
     pygame.display.flip()
