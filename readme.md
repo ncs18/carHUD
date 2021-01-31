@@ -13,6 +13,9 @@ Amazing heads up display for your car!
   - Turn signal indicator
   - Light indicator
   - Minimal view vs Max info view
+  
+# IMPORTANT NOTE REGARDING OSD-II READERS
+Unplug reader from car after use, leaving it in could drain your car battery!!!
 
 # How to run
 In a windows command line:
