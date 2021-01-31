@@ -41,21 +41,21 @@ while not done:
 
     keys = pygame.key.get_pressed()
 
-    #vSpeed = random.randint(20, 75)
+    #v_speed = random.randint(20, 75)
 
     if keys[pygame.K_LEFT]:
-        vSpeed = vSpeed - 1
+        v_speed = v_speed - 1
     if keys[pygame.K_RIGHT]:
-        vSpeed = vSpeed + 1
+        v_speed = v_speed + 1
     if keys[pygame.K_UP]:
-        vSpeed = vSpeed + 5
+        v_speed = v_speed + 5
     if keys[pygame.K_DOWN]:
-        vSpeed = vSpeed - 5
+        v_speed = v_speed - 5
 
-    vSpeedString = str(vSpeed)
+    v_speedstring = str(v_speed)
     pygame.draw.lines(screen, GREEN, True, [(178, 338), (270, 338), (279, 350), (270, 362), (178, 362)], 2)
     pygame.draw.line(screen, GREEN, [285, 100], [285, 620], 2)
-    veh_speed((vSpeedString + " MPH"), GREEN)
+    veh_speed((v_speedstring + " MPH"), GREEN)
 
     pygame.display.update()
     pygame.display.flip()
