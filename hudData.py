@@ -11,6 +11,7 @@ WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
+ORANGE = (255, 69, 0)
 # Define pi for easy use
 pi = 3.14159265
 
@@ -59,6 +60,13 @@ turn_rect_left = pygame.Rect([285, 300, 355, 420])
 turn_rect_right = pygame.Rect([640, 300, 355, 420])
 turn_track = 0
 
+# Tire pressure colors, will eventually go off obd data and if/elif statements
+tire_color_rr = GREEN
+tire_color_rl = GREEN
+tire_color_fr = ORANGE
+tire_color_fl = GREEN
+
+
 # Main Loop
 while not done:
 
@@ -99,6 +107,7 @@ while not done:
     pygame.draw.lines(screen, GREEN, True, [(178, 338), (270, 338), (279, 350), (270, 362), (178, 362)], 2)
     pygame.draw.lines(screen, GREEN, True, [(1130, 338), (1010, 338), (1001, 350), (1010, 362), (1130, 362)], 2)
 
+    # Maxing out turn track at 90 degrees
     if turn_track > 90:
         turn_track = 90
     elif turn_track < -90:
@@ -109,6 +118,12 @@ while not done:
         pygame.draw.arc(screen, GREEN, turn_rect_left, 0, turn_track * (pi / 180), 3)
     elif turn_track < 0:
         pygame.draw.arc(screen, GREEN, turn_rect_right, pi - (turn_track * -(pi / 180)), pi, 3)
+
+    # Drawing tire rectangles (changing tire color up above will change this for now)
+    pygame.draw.polygon(screen, tire_color_rr, [(1100, 320), (1100, 270), (1115, 270), (1115, 320)], 6)
+    pygame.draw.polygon(screen, tire_color_rl, [(1030, 320), (1030, 270), (1045, 270), (1045, 320)], 6)
+    pygame.draw.polygon(screen, tire_color_fr, [(1100, 170), (1100, 220), (1115, 220), (1115, 170)], 6)
+    pygame.draw.polygon(screen, tire_color_fl, [(1030, 170), (1030, 220), (1045, 220), (1045, 170)], 6)
 
     # Drawing two vertical lines on hud
     pygame.draw.line(screen, GREEN, [285, 100], [285, 620], 2)
