@@ -79,9 +79,9 @@ while not done:
     v_rpm = random.randint(1000, 1500)
 
     if keys[pygame.K_LEFT]:
-        turn_track = turn_track + 3
+        turn_track = turn_track + 8
     if keys[pygame.K_RIGHT]:
-        turn_track = turn_track - 3
+        turn_track = turn_track - 8
     if keys[pygame.K_UP]:
         v_speed = v_speed + 5
     if keys[pygame.K_DOWN]:
@@ -96,6 +96,11 @@ while not done:
     # Drawing boxes around MPH and RPM
     pygame.draw.lines(screen, GREEN, True, [(178, 338), (270, 338), (279, 350), (270, 362), (178, 362)], 2)
     pygame.draw.lines(screen, GREEN, True, [(1130, 338), (1010, 338), (1001, 350), (1010, 362), (1130, 362)], 2)
+
+    if turn_track > 90:
+        turn_track = 90
+    elif turn_track < -90:
+        turn_track = -90
 
     # Uses 2 separate rects to draw turn calculation line based off of wheel rotation 'turn_track'
     if turn_track > 0:
