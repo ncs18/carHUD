@@ -86,6 +86,8 @@ while not done:
         v_speed = v_speed + 5
     if keys[pygame.K_DOWN]:
         v_speed = v_speed - 5
+    if keys[pygame.K_SPACE]:
+        pygame.draw.rect(screen, RED, pygame.Rect(30, 30, 60, 60)) 
 
     ################################################
 
