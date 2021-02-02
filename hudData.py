@@ -27,14 +27,14 @@ done = False
 clock = pygame.time.Clock()
 
 # Creating different fonts for text
-font = pygame.font.SysFont(None, 36)
-clock_font = pygame.font.SysFont(None, 50)
+font = pygame.font.SysFont(None, 56)
+clock_font = pygame.font.SysFont(None, 65)
 
 
 # Vehicle speed text display function
 def veh_speed(msg, color):
     speed_text = font.render(msg, True, color)
-    screen.blit(speed_text, [180, 340])
+    screen.blit(speed_text, [130, 340])
 
 
 # Vehicle rpm text display function
@@ -46,7 +46,7 @@ def veh_rpm(msg, color):
 # Time text display function
 def draw_time(msg, color):
     time_text = clock_font.render(msg, True, color)
-    screen.blit(time_text, [120, 580])
+    screen.blit(time_text, [90, 580])
 
 
 # Initialize speed and rpm variables
@@ -104,8 +104,8 @@ while not done:
     v_rpm_string = str(v_rpm)
 
     # Drawing boxes around MPH and RPM
-    pygame.draw.lines(screen, GREEN, True, [(178, 338), (270, 338), (279, 350), (270, 362), (178, 362)], 2)
-    pygame.draw.lines(screen, GREEN, True, [(1130, 338), (1010, 338), (1001, 350), (1010, 362), (1130, 362)], 2)
+    pygame.draw.lines(screen, GREEN, True, [(125, 375), (273, 375), (280, 358), (273, 338), (125, 338)], 4)
+    pygame.draw.lines(screen, GREEN, True, [(1200, 338), (1010, 338), (1001, 358), (1010, 375), (1200, 375)], 4)
 
     # Maxing out turn track at 90 degrees
     if turn_track > 90:
@@ -115,9 +115,9 @@ while not done:
 
     # Uses 2 separate rects to draw turn calculation line based off of wheel rotation 'turn_track'
     if turn_track > 0:
-        pygame.draw.arc(screen, GREEN, turn_rect_left, 0, turn_track * (pi / 180), 3)
+        pygame.draw.arc(screen, GREEN, turn_rect_left, 0, turn_track * (pi / 180), 4)
     elif turn_track < 0:
-        pygame.draw.arc(screen, GREEN, turn_rect_right, pi - (turn_track * -(pi / 180)), pi, 3)
+        pygame.draw.arc(screen, GREEN, turn_rect_right, pi - (turn_track * -(pi / 180)), pi, 4)
 
     # Drawing tire rectangles (changing tire color up above will change this for now)
     pygame.draw.polygon(screen, tire_color_rr, [(1100, 320), (1100, 270), (1115, 270), (1115, 320)], 6)
@@ -126,8 +126,8 @@ while not done:
     pygame.draw.polygon(screen, tire_color_fl, [(1030, 170), (1030, 220), (1045, 220), (1045, 170)], 6)
 
     # Drawing two vertical lines on hud
-    pygame.draw.line(screen, GREEN, [285, 100], [285, 620], 2)
-    pygame.draw.line(screen, GREEN, [995, 100], [995, 620], 2)
+    pygame.draw.line(screen, GREEN, [285, 100], [285, 620], 4)
+    pygame.draw.line(screen, GREEN, [995, 100], [995, 620], 4)
     # Displaying text of MPH and RPM with actual numbers
     veh_speed((v_speed_string + " MPH"), GREEN)
     veh_rpm((v_rpm_string + " RPM"), GREEN)
