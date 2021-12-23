@@ -14,7 +14,7 @@ Amazing heads up display for your car!
   - Light indicator
   - Minimal view vs Max info view
   
-# IMPORTANT NOTE REGARDING OSD-II READERS
+# IMPORTANT NOTE REGARDING OBD-II READERS
 Unplug reader from car after use, leaving it in could drain your car battery!!!
 
 # How to run
